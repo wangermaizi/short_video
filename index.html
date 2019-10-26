@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>内涵段子</title>
+    <script src="js/Ajax_package.js" type="text/javascript" charset="UTF-8"></script>
+    <script src="js/Responsive_layout.js" type="text/javascript" charset="UTF-8"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="css.css" type="text/css">
+    <script src="js/index.js" type="text/javascript" charset="UTF-8"></script>
+    <script src="js/tk.js" type="text/javascript" charset="UTF-8"></script>
+    <link rel="stylesheet" href="tk.css" type="text/css">
+</head>
+<body>
+    <div class="videoList">
+
+    </div>
+    <div class="updata">
+        点击刷新内容
+    </div>
+    <!--实际播放位置-->
+    <div class="playPage">
+        <video controls="controls"></video>
+        <div class="close"></div>
+    </div>
+    <script>
+        var videoListDiv = document.querySelector('.videoList');
+        var httpUrl = "https://api.apiopen.top/getJoke";
+        var num = 1;
+        var data = {
+            page:num,
+            count:10,
+            type:"video"
+        };
+        getAjax(httpUrl,data,function (xhr) {
+            //console.log(xhr);
+            //console.log(JSON.parse(xhr.response));
+            var resultObj = JSON.parse(xhr.response);
+            var videoList = resultObj.result;
+            var data = {
+                title:'致大少',
+                content:'在这里没什么好说的,咱人也嘴笨,只好祝大少考研顺利,闲时看看我这个视频缓解一下压力,(づ￣ 3￣)づ',
+                tip:'对了不要点右上角的X键',
+                url:"img/picture1.jpg",
+                confirmFn:function(){
+                    renderVideo(videoList);
+                    updataDiv.style.display = 'block'
+                },
+                cancelFn:function(){
+                    renderVideo(videoList);
+                    updataDiv.style.display = 'block'
+                }
+            };
+            tkAlert(data)
+        });
+        //点击刷新内容事件
+        var updataDiv = document.querySelector('.updata');
+        updataDiv.style.display = 'none';
+        updataDiv.onclick = function () {
+            num++;
+            data = {
+                page:num,
+                count:10,
+                type:"video"
+            };
+            videoListDiv.innerHTML = '';
+            getAjax(httpUrl,data,function (xhr) {
+                //console.log(xhr);
+                //console.log(JSON.parse(xhr.response));
+                var resultObj = JSON.parse(xhr.response);
+                var videoList = resultObj.result;
+                renderVideo(videoList);
+            });
+            window.scrollTo(0,0)
+        };
+        var playPageDiv = document.querySelector('.playPage');
+        var videoDiv = document.querySelector('.playPage video');
+        //var videoItem = document.querySelectorAll('');
+        //设置点击事件
+        videoListDiv.onclick = function (e) {
+            console.log(e);
+            console.log(e.target);
+            if (e.target.className == 'play') {
+                var index = e.target.dataset.index;
+                var url = e.target.dataset.video;
+                playPageDiv.style.display = 'block';
+                videoDiv.src = url;
+                videoDiv.play();
+            }
+        };
+        var closeDiv = document.querySelector('.playPage .close');
+        closeDiv.onclick = function () {
+            playPageDiv.style.display = 'none';
+            videoDiv.pause();
+        };
+    </script>
+</body>
+</html>

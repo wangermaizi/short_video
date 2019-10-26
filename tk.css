@@ -1,0 +1,78 @@
+.zhezhao{
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+.alert{
+    width: 6rem;
+    height: 4rem;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+}
+.alert .header{
+    border-bottom: 1px solid #ccc;
+    height: 0.8rem;
+    line-height: 0.8rem;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 0.3rem;
+}
+.alert .header .title{
+    font-size: 0.3rem;
+    font-weight: 900;
+}
+.alert .header .close{
+    font-weight: 300;
+    color: #cccccc;
+    font-size: 0.3rem;
+}
+.alert .header .close:hover{
+    color: orange;
+}
+.alert .main{
+    flex: 1;
+    padding: 0.3rem 0.1rem;
+    display: flex;
+}
+.alert .main .detail{
+    font-size: 0.18rem;
+    flex: 1;
+}
+.alert .main img{
+    width: 1.5rem;
+    height: 100%
+}
+.alert .btnList{
+    height: 0.8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 0.3rem;
+}
+.alert .btnList .btn{
+    height: 0.5rem;
+    width: 1.2rem;
+    text-align: center;
+    line-height: 0.5rem;
+    margin: 0 0.05rem;
+    font-size: 0.16rem;
+}
+.alert .btnList .btn:nth-child(1){
+    background-color: orange;
+}
+.alert .btnList .btn:nth-child(2){
+    background-color: #999;
+}
+.current{
+    width: 3rem;
+    height: 3rem;
+    background-color: blue;
+}
